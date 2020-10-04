@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
+public class HomeController {
     private final Sender sender;
     private final Receiver receiver;
 
-    public Controller() {
+    public HomeController() {
         this.receiver = new ReceiverImpl();
         this.sender = new SenderImpl( this.receiver );
     }

@@ -10,9 +10,4 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="receiver" class="org.maslov.info.interfaces.ReceiverImpl"/>
-    <bean id="sender" class="org.maslov.info.interfaces.SenderImpl">
-        <constructor-arg name="receiver" ref="receiver"/>
-    </bean>
-
 </beans>

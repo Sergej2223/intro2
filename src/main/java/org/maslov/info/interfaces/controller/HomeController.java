@@ -1,26 +1,18 @@
 package org.maslov.info.interfaces.controller;
 
-import org.maslov.info.interfaces.Receiver;
-import org.maslov.info.interfaces.ReceiverImpl;
-import org.maslov.info.interfaces.Sender;
-import org.maslov.info.interfaces.SenderImpl;
+import org.maslov.info.interfaces.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
-    private final Sender sender;
-    private final Receiver receiver;
-
-    public HomeController() {
-        this.receiver = new ReceiverImpl();
-        this.sender = new SenderImpl( this.receiver );
-    }
+    @Autowired
+    private org.springframework.web.context.WebApplicationContext context;
 
     @RequestMapping(value = "/")
     public String home() {
-        return sender.sendMessage("Hello Word!");
+        Sender sender = context.getBean("sender", Sender.class);
+        return sender.sendMessage("My Message");
     }
-    }
-
-
+}

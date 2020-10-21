@@ -5,6 +5,7 @@ import org.maslov.info.polzavatel.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
@@ -31,11 +32,15 @@ public class HomeController {
         return "users";
     }
     @GetMapping(value = "/")
-    public String getSignUp(){
+    public String getSignUp(Model model){
+        model.addAttribute("user", new User() );
         return "sign_up";
     }
     @PostMapping(value = "/")
-    public String getSignUp(@ModelAttribute User user){
+    public String getSignUp(@ModelAttribute User user, BindingResult result){
+        if (result.hasErrors()){
+            return "sign_up";
+        }
         users.add(user);
         return "redirect:/users";
     }
